@@ -1,31 +1,24 @@
 import { useEffect, useState } from 'react'
 import {io} from "socket.io-client"
-import './App.css'
+import './index.css'
+import Header from "./components/Header";
+import {Outlet} from "react-router-dom";
 
 function App() {
-  const [socket, setSocket] = useState(null)
-  const [message, setMessage] = useState("")
+  const [socket, setSocket] = useState(null);
 
-  useEffect(()=> {
-    setSocket(io("http://localhost:3000"))
-  },[])
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    console.log(message);
-    socket.emit('message', message);
-    setMessage("");
-  }
+  useEffect(() => {
+    setSocket(io("http://localhost:3000"));
+  }, []);
 
   return (
-    <div id="app">
-      <ul id="messages"></ul>
-      <form id="form" onSubmit={handleSubmit}>
-        <textarea id="input" name="message" value={message} autoComplete="off" placeholder='send a message'onChange={(e) => setMessage(e.target.value)}/>
-        <button type="submit">Send</button>
-      </form>
+    <div id="app" className="dark">
+      <div id="container">
+        <Header/>
+        <Outlet context={{ socket }}/>
+      </div>
     </div>
-    )
-  }
+  )
+}
 
 export default App
