@@ -40,40 +40,134 @@ body {
   height: 100vh;
   width: 100vw;
   line-height: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   margin: 0;
   padding: 0;
   background-color: var(--bg);
   color: var(--tc);
 }
+
+.navbar{
+  height: 90px;
+  width: 100%;
+  background: var(--bg);
+  color: var(--tc);
+  display: flex;
+  align-items: center;
+}
+
+.navbar-mjleedev{
+  color: var(--pc);
+  font-family: "Alata", sans-serif;
+  font-size: 1.25rem;
+  text-decoration: none;
+  margin: 1em 3em;
+}
+
+.navbar-room-form{
+  width: 100%;
+  text-align: center;
+}
+
+.navbar-room-input{
+  margin-right: 200px;
+  padding: 0.5em;
+  height: 100%;
+  background-color: var(--bg2);
+  border: 1px solid var(--tc2);
+  color: var(--tc);
+  border-radius: 0.4em;
+  box-shadow: 0px 8px 56px rgb(15 80 100 / 5%)
+}
+
+@media screen and (max-width: 768px) {
+  .navbar-room-input {
+    margin-right: 0px;
+  }
+}
+
 ul {
   list-style-type: none;
-
 }
-#container{
-  position: absolute;
-  height: 80vh;
-  width: 30vw;
-  /* border: 0.15em solid var(--pc); */
-  border-radius: 0.5em;
+
+.chat-container{
+  margin: auto;
+  height: 80%;
+  width: 40%;
+  border-radius: 0.7em;
+  border: 1px solid var(--tc2);
+  background-color: var(--bg2);
   display: flex;
   flex-direction: column;
-  background-color: var(--bg2)
+  transition: ease all .5s;
 }
 
-#messages{
-  flex-grow:9;
-  width: 100%
+@media screen and (max-width: 1200px) {
+  .chat-container {
+    width: 60%;
+  }
 }
 
-#input{
-  width: 100%
+@media screen and (max-width: 768px) {
+  .chat-container {
+    width: 80%;
+  }
 }
-#form{
-  flex-grow:1;
+
+.chat-messages{
+  flex:9;
+  width: 100%;
+  overflow:auto;
+  font-size: 1.3em;
+  color: var(--tc);
+
+}
+
+.chat-form{
   width: 100%;
   display: flex;
+}
+
+.chat-text-container{
+  width: 100%;
+}
+
+.chat-text{
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
+  resize: none;
+  border-bottom-left-radius: 0.7em;
+  font-size: 1.3em;
+  background-color: var(--bg2);
+  color: var(--tc);
+  border: 1px solid var(--tc2);
+}
+
+.chat-button{
+  border-bottom-right-radius: 0.7em;
+  border: 1px solid var(--tc2);
+  background-color: var(--bg2);
+  color: var(--tc);
+
+}
+.hide-scrollbar{
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+::placeholder {
+  color:  var(--tc);
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color:  var(--tc);
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+ color:  var(--tc);
 }
