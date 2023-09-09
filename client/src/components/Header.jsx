@@ -1,14 +1,22 @@
 import { useEffect, useState } from 'react'
 import { useOutletContext, useParams } from "react-router-dom";
-import { v4 } from 'uuid'
-import { Link } from 'react-router-dom';
+import { Link, Form } from 'react-router-dom';
 export default function Header() {
-  const room_id = v4();
+  const [roomId, setRoomId] = useState("")
+
   return (
-    <header id="app" className="dark">
-      <nav id="container">
-        <Link to={`/room/${room_id}`}>Homepage</Link>
+    <header>
+      <nav className="navbar">
+        <a className="navbar-mjleedev" href='https://mjlee.dev'> mjlee.dev </a>
+        <Form className="navbar-room-form" method="get" action={`/room/${roomId}`}>
+          <input className="navbar-room-input"
+            placeholder='join a room'
+            type="text"
+            onChange={(e) => setRoomId(e.target.value)}
+          />
+        </Form>
+        <p className="navbar-filler"></p>
       </nav>
     </header>
   )
-}
+}``

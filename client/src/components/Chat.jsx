@@ -53,22 +53,22 @@ export default function Chat() {
 
   function Typing() {
     if (typing) {
-      return <p>typing...</p>
+      return <p className='typing-alert'>typing...</p>
     }
   }
 
   return (
-    <div id="app" className="dark">
-      <div id="container">
-        <ul id="messages">
-          {chat.map((data, index) => <li sx={{textAlign:"right"}} key={index}>{data}</li>)}
-        </ul>
-        <Typing/>
-        <form id="form" onSubmit={handleSubmit} onKeyDown={e => handleKeyDown(e)} onKeyUp={e => handleKeyUp(e)}>
-          <textarea id="input" name="message" value={message} autoComplete="off" placeholder='send a message' onChange={(e) => setMessage(e.target.value)}/>
-          <button id="submit" type="submit">Send</button>
-        </form>
-      </div>
+    <div className='chat-container'>
+      <ul className="chat-messages hide-scrollbar">
+        {chat.map((data, index) => <li sx={{textAlign:"right"}} key={index}>{data}</li>)}
+      </ul>
+      <Typing/>
+      <form className="chat-form" onSubmit={handleSubmit} onKeyDown={e => handleKeyDown(e)} onKeyUp={e => handleKeyUp(e)}>
+        <div className='chat-text-container'>
+          <textarea className="chat-text" value={message} autoComplete="off" placeholder='send a message' onChange={(e) => setMessage(e.target.value)}/>
+        </div>
+        <button className="chat-button" type="submit">Send</button>
+      </form>
     </div>
   )
 }

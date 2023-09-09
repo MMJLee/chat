@@ -13,10 +13,8 @@ function App() {
 
   return (
     <div id="app" className="dark">
-      <div id="container">
-        <Header/>
-        <Outlet context={{ socket }}/>
-      </div>
+      <Header/>
+      <Outlet context={{ socket }}/>
     </div>
   )
 }
