@@ -15,7 +15,6 @@ export default function Header() {
             onChange={(e) => setRoomId(e.target.value)}
           />
         </Form>
-        <p className="navbar-filler"></p>
       </nav>
     </header>
   )
