@@ -1,30 +1,28 @@
 
 const sockets = (socket) => {
-  socket.on("c_join", ({room_id}) => {
-    console.log(room_id)
-    socket.join(room_id)
+  socket.on("c_join", (data) => {
+    socket.join(data.room_id)
     let s = socket.broadcast;
-    s = room_id ? s.to(room_id) : s;
-    s.emit('s_join', 'joined');
+    s = data.room_id ? s.to(data.room_id) : s;
+    s.emit('s_join', {user: data.user});
   })
   
-  socket.on('c_msg', ({room_id, message}) => {
-    console.log(room_id,message)
+  socket.on('c_msg', (data) => {
     let s = socket.broadcast;
-    s = room_id ? s.to(room_id) : s;
-    s.emit("s_msg", {message});
+    s = data.room_id ? s.to(data.room_id) : s;
+    s.emit("s_msg", {user: data.user, message: data.message});
   });
 
-  socket.on('c_start', ({room_id}) => {
+  socket.on('c_start', (data) => {
     let s = socket.broadcast;
-    s = room_id ? s.to(room_id) : s;
-    s.emit("s_start");
+    s = data.room_id ? s.to(data.room_id) : s;
+    s.emit("s_start", {user: data.user});
   });
 
-  socket.on('c_stop', ({room_id}) => {
+  socket.on('c_stop', (data) => {
     let s = socket.broadcast;
-    s = room_id ? s.to(room_id) : s;
-    s.emit("s_stop");
+    s = data.room_id ? s.to(data.room_id) : s;
+    s.emit("s_stop", {user: data.user});
   });
 };
 

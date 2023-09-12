@@ -1,8 +1,14 @@
-import { useEffect, useState } from 'react'
-import { useOutletContext, useParams } from "react-router-dom";
-import { Link, Form } from 'react-router-dom';
+import { useEffect,useState } from 'react'
+import { Form,useParams } from 'react-router-dom';
+
 export default function Header() {
   const [roomId, setRoomId] = useState("")
+  const {room_id} = useParams();
+
+  useEffect(() => {
+    if (!room_id) return;
+    setRoomId(room_id);
+  }, [room_id]);
 
   return (
     <header>
@@ -11,6 +17,7 @@ export default function Header() {
         <Form className="navbar-room-form" method="get" action={`/room/${roomId}`}>
           <input className="navbar-room-input"
             placeholder='join a room'
+            value={roomId}
             type="text"
             onChange={(e) => setRoomId(e.target.value)}
           />

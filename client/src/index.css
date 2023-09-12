@@ -39,7 +39,6 @@ body {
 #app {
   height: 100vh;
   width: 100vw;
-  line-height: 2rem;
   margin: 0;
   padding: 0;
   background-color: var(--bg);
@@ -53,11 +52,11 @@ body {
   color: var(--tc);
   display: flex;
   align-items: center;
+  font-family: "Alata", sans-serif;
 }
 
 .navbar-mjleedev{
   color: var(--pc);
-  font-family: "Alata", sans-serif;
   font-size: 1.25rem;
   text-decoration: none;
   margin: 1em 3em;
@@ -80,29 +79,42 @@ body {
     margin-top: 0.1em;
     margin-right: 0px;
     text-align: right;
-
   }
 }
 
 .navbar-room-input{
-  margin-right: 200px;
+  margin-right: 209px;
   padding: 0.5em;
   height: 100%;
   background-color: var(--bg2);
   border: 1px solid var(--tc2);
   color: var(--tc);
   border-radius: 0.4em;
+  font-family: "Alata", sans-serif;
 }
-
 @media screen and (max-width: 768px) {
   .navbar-room-input {
     margin-right: 20px;
   }
 }
+.username-form{
+  display: flex;
+}
+
+.username-input{
+  padding: 0.5em;
+  background-color: var(--bg2);
+  border: 1px solid var(--tc2);
+  color: var(--tc);
+  border-radius: 0.4em;
+  font-family: "Alata", sans-serif;
+  margin:auto;
+}
 
 ul {
   list-style-type: none;
   padding-inline-start: 0px;
+  font-family: "Alata", sans-serif;
 }
 
 .chat-container{
@@ -129,12 +141,36 @@ ul {
   }
 }
 
-.chat-messages{
+#chat-messages{
   flex:9;
   width: 100%;
   overflow:auto;
   font-size: 1.3em;
   color: var(--tc);
+  padding: 0;
+  margin: 0;
+}
+
+.chat-message-container{
+  display: flex; 
+}
+
+.chat-message {
+  margin: 0;
+  padding: 0;
+  font-size: 0.75em;
+  display: block;
+  line-height: auto;
+  padding-left: 7px;
+  padding-right: 0;
+}
+
+.my-messages{
+  display: flex; 
+  justify-content: flex-end;
+  padding-right: 7px;
+  padding-left: 0;
+  text-align: right;
 }
 
 .chat-form{
@@ -152,12 +188,14 @@ ul {
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   box-sizing: border-box;         /* Opera/IE 8+ */
+  outline: none;
   resize: none;
   border-bottom-left-radius: 0.7em;
-  font-size: 1.3em;
+  font-size: 1em;
   background-color: var(--bg2);
   color: var(--tc);
   border: 1px solid var(--tc2);
+  font-family: "Alata", sans-serif;
 }
 
 .chat-button{
@@ -165,8 +203,9 @@ ul {
   border: 1px solid var(--tc2);
   background-color: var(--bg2);
   color: var(--tc);
-
+  font-family: "Alata", sans-serif;
 }
+
 .hide-scrollbar{
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
@@ -183,4 +222,9 @@ ul {
 }
 ::-ms-input-placeholder { /* Microsoft Edge */
  color:  var(--tc);
+}
+
+.typing-alert{
+  font-family: "Alata", sans-serif;
+  padding-left: 7px;
 }

@@ -1,16 +1,16 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import Chat from "./components/Chat";
 
 export default function Room() {
   const {room_id} = useParams();
-  const { socket } = useOutletContext();
+  const { socket, user } = useOutletContext();
 
   useEffect(() => {
     console.log(room_id)
     if (!socket) return;
-    socket.emit("c_join", {room_id});
+    socket.emit("c_join", {room_id:room_id, user:user});
   }, [socket]);
 
-  return <Chat/>;
+  return (<Chat/>);
 }
