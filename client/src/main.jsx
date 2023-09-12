@@ -7,11 +7,11 @@ import './index.css'
 
 const router = createBrowserRouter([
   {
-    path: "/room",
+    path: "/",
     element: <App/>,
     children: [
       {
-      path: "/room/:room_id",
+      path: "/:room_id",
       element: <Room/>
       },
     ]

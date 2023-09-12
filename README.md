@@ -11,3 +11,6 @@ where no contents are kept on server.
 
 # todo
 fileshare
+light theme button
+auto disconnect idle
+user count in room

@@ -14,7 +14,7 @@ export default function Header() {
     <header>
       <nav className="navbar">
         <a className="navbar-mjleedev" href='https://mjlee.dev'> mjlee.dev </a>
-        <Form className="navbar-room-form" method="get" action={`/room/${roomId}`}>
+        <Form className="navbar-room-form" method="get" action={`/${roomId}`}>
           <input className="navbar-room-input"
             placeholder='join a room'
             value={roomId}
@@ -25,4 +25,4 @@ export default function Header() {
       </nav>
     </header>
   )
-}``
+}

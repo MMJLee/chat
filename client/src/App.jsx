@@ -9,7 +9,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    setSocket(io("http://localhost:3000"));
+    setSocket(io(import.meta.env.SERVER_URL));
   }, []);
 
   function handleSubmit(e) {
