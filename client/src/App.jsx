@@ -9,7 +9,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    setSocket(io(import.meta.env.SERVER_URL));
+    setSocket(io(import.meta.env.SERVER_URL, {withCredentials:true}));
   }, []);
 
   function handleSubmit(e) {
