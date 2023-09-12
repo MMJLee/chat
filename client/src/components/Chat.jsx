@@ -43,7 +43,7 @@ export default function Chat() {
   function handleSubmit(e) {
     e.preventDefault();
     if (message != '') {
-      setChat((chat) => [...chat,message]);
+      setChat((chat) => [...chat,{user:user, message:message}]);
       socket.emit("c_msg", {room_id:room_id, user:user, message:message});
       setMessage(""); 
     }
