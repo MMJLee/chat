@@ -4,12 +4,12 @@ import http from "http";
 import { Server } from "socket.io";
 import sockets from "./sockets.js";
 
-const port = process.env.PORT;
+const port = 3000;
 const app = express();
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin:[process.env.CLIENT_URL],
+    origin:['https://chat.mjlee.dev'],
     methods: ["GET", "POST"],
     credentials: true
   }

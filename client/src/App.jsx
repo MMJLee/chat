@@ -9,7 +9,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    setSocket(io(import.meta.env.SERVER_URL, {withCredentials:true}));
+    setSocket(io('https://api.mjlee.dev', {withCredentials:true}));
   }, []);
 
   function handleSubmit(e) {
