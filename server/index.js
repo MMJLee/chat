@@ -15,10 +15,8 @@ const io = new Server(httpServer, {
 
 io.on("connection", sockets);
 
-httpServer.listen(port, () => {
-  console.log(`Socket.IO server running at http://localhost:${port}/`);
-});
+httpServer.listen(port, () => {});
 
-app.get('/room/count/:room_id', (req, res) => {
+app.get('/count/:room_id', (req, res) => {
   res.send(io.of('/room/'+req.params['room_id']).sockets.size);
 })
