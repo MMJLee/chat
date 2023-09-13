@@ -31,7 +31,6 @@ function App() {
   return (
     <div id="app" className="dark">
       <Header/>
-
       <Chatroom socket={socket} user={user}/>
     </div>
   )

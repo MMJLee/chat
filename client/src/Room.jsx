@@ -7,7 +7,6 @@ export default function Room() {
   const { socket, user } = useOutletContext();
 
   useEffect(() => {
-    console.log(room_id)
     if (!socket) return;
     socket.emit("c_join", {room_id:room_id, user:user});
   }, [socket]);

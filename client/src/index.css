@@ -77,7 +77,8 @@ body {
 @media screen and (max-width: 768px) {
   .navbar-room-form{
     margin-top: 0.1em;
-    margin-right: 0px;
+    margin-left: 0;
+    margin-right: 0;
     text-align: right;
   }
 }
@@ -97,6 +98,14 @@ body {
     margin-right: 20px;
   }
 }
+
+.navbar-room-count {
+  display: inline;
+  margin-right: 1em;
+  font-family: "Alata", sans-serif;
+  color: var(--tc);
+}
+
 .username-form{
   display: flex;
 }
@@ -152,26 +161,36 @@ ul {
 }
 
 .chat-message-container{
+  display: flex;
+  padding-left: 5px;
+  padding-right: 0;
+  padding-top: 0.6em;
+}
+
+.my-messages{
   display: flex; 
+  justify-content: flex-end;
+  padding-right: 5px;
+  padding-left: 0;
+  text-align: right;
+}
+
+.chat-user {
+  margin: 0;
+  padding: 0;
+  font-size: 0.6em;
+  line-height: 0.6em;
+  color: var(--tc2);
 }
 
 .chat-message {
   margin: 0;
   padding: 0;
   font-size: 0.75em;
-  display: block;
   line-height: auto;
-  padding-left: 7px;
-  padding-right: 0;
 }
 
-.my-messages{
-  display: flex; 
-  justify-content: flex-end;
-  padding-right: 7px;
-  padding-left: 0;
-  text-align: right;
-}
+
 
 .chat-form{
   width: 100%;

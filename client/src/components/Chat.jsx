@@ -74,7 +74,9 @@ export default function Chat() {
   function ChatMessageItem(props) {
     return (
       <div className={user == props.user ? 'chat-message-container my-messages' : 'chat-message-container'}>
-        <p className='chat-message'>{props.user}<br></br>{props.message}</p>
+        <div>
+          <p className='chat-user'>{props.user}</p><p className='chat-message'>{props.message}</p>
+        </div>
       </div>
     )
   }
