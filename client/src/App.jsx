@@ -9,7 +9,7 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    setSocket(io('https://api.mjlee.dev', {withCredentials:true}));
+    setSocket(io(import.meta.env.VITE_SERVER_URL, {withCredentials:true}));
     // setSocket(io('http://localhost:3000'));
   }, []);
 

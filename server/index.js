@@ -23,10 +23,14 @@ io.on("connection", sockets);
 
 httpServer.listen(port, () => {});
 
+app.get('/count', (req, res) => {
+  res.send( {count:io.engine.clientsCount} );
+});
+
 app.get('/count/:room_id', (req, res) => {
   if(io.sockets.adapter.rooms.has(req.params.room_id)) {
-    res.send({count: io.sockets.adapter.rooms.get(req.params.room_id).size})
+    res.send({count: io.sockets.adapter.rooms.get(req.params.room_id).size});
   } else {
-    res.send({count: 0})
+    res.send({count: 0});
   }
 });
