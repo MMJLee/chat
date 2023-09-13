@@ -36,7 +36,7 @@ export default function Header() {
     <header>
       <nav className="navbar">
         <a className="navbar-mjleedev" href='https://mjlee.dev'> mjlee.dev </a>
-        <Form reloadDocument className="navbar-room-form" method="get" action={`/${roomId}`}>
+        <Form className="navbar-room-form" method="get" action={`/${roomId}`}>
           <p className='navbar-room-count'>{count}</p>
           <input className="navbar-room-input"
             placeholder='join a room'

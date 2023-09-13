@@ -8,8 +8,9 @@ export default function Room() {
 
   useEffect(() => {
     if (!socket) return;
+    socket.emit("c_leave", {user:user});
     socket.emit("c_join", {room_id:room_id, user:user});
-  }, [socket]);
+  }, [socket,room_id]);
 
   return (<Chat/>);
 }

@@ -27,6 +27,11 @@ export default function Chat() {
         user: data.user,
         message: 'joined'}])
     });
+    socket.on("s_leave", (data)=> {
+      setChat((chat) => [...chat,{
+        user: data.user,
+        message: 'left'}])
+    });
   }, [socket]);
   
   useEffect(() => {

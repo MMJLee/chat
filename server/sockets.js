@@ -27,6 +27,15 @@ const sockets = (socket) => {
     s = data.room_id ? s.to(data.room_id) : s;
     s.emit("s_stop", {user: data.user});
   });
+
+  socket.on('c_leave', (data) => {
+    let s = socket.broadcast;
+    let rooms = Object.keys(socket.rooms);
+    rooms.forEach((room) => {
+      socket.leave(room);
+      s.to(room).emit("s_leave", {user: data.user});
+    });
+  });
 };
 
 export default sockets;
