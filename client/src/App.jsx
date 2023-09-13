@@ -10,6 +10,7 @@ function App() {
 
   useEffect(() => {
     setSocket(io('https://api.mjlee.dev', {withCredentials:true}));
+    // setSocket(io('http://localhost:3000'));
   }, []);
 
   function handleSubmit(e) {

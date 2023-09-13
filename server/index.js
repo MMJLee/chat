@@ -2,15 +2,20 @@ import express from "express";
 import http from "http";
 import { Server } from "socket.io";
 import sockets from "./sockets.js";
+import cors from 'cors';
 
 const port = 3000;
 const app = express();
+app.use(cors({
+  // origin: ["http://localhost:5173","http://127.0.0.1:5173","http://localhost:5173/*","http://127.0.0.1:5173/*"],
+  origin:[process.env.CLIENT_URL]
+}));
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin:[process.env.CLIENT_URL],
+    // origin: ["http://localhost:5173","http://127.0.0.1:5173","http://localhost:5173/*","http://127.0.0.1:5173/*"],
+    origin:[process.env.CLIENT_URL], credentials: true,
     methods: ["GET", "POST"],
-    credentials: true
   }
 })
 
@@ -19,5 +24,9 @@ io.on("connection", sockets);
 httpServer.listen(port, () => {});
 
 app.get('/count/:room_id', (req, res) => {
-  res.send({ count:io.of('/room/'+req.params['room_id']).sockets.size });
-})
+  if(io.sockets.adapter.rooms.has(req.params.room_id)) {
+    res.send({count: io.sockets.adapter.rooms.get(req.params.room_id).size})
+  } else {
+    res.send({count: 0})
+  }
+});

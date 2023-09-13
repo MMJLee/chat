@@ -1,34 +1,44 @@
 import { useEffect,useState } from 'react'
-import { Form, useOutletContext, useParams } from 'react-router-dom';
+import { Form, useNavigate, useParams } from 'react-router-dom';
+
+
 
 export default function Header() {
   const [roomId, setRoomId] = useState("")
-  const {room_id} = useParams();
+  const params = useParams();
   const [count, setCount] = useState(0)
 
   useEffect(() => {
-    if (!room_id) return;
-    setRoomId(room_id);
-  }, [room_id]);
+    if (!params.room_id) return;
+    setRoomId(params.room_id);
+  }, [params.room_id]);
 
   useEffect(() => {
-    const timer = setInterval(() => getCount(), 5000);
+    const timer = setInterval(() => getCount(), 3000);
     return () => clearInterval(timer);
   },[]);
 
   function getCount() {
-    fetch(`https://api.mjlee.dev/count/${room_id}`)
-    .then(response => response.json())
-    .then(json => setCount(json.count))
-    .catch(error => console.error(error));
+    if (params.room_id) {
+      // fetch(`https://api.mjlee.dev/count/${params.room_id}`)
+      fetch(`http://localhost:3000/count/${params.room_id}`)
+      .then(response => response.json())
+      .then(json => setCount(json.count))
+      .catch(error => console.error(error));
+    }
     return 
   }
 
+  const navigate = useNavigate();
+  const refreshPage = () => {
+    navigate(0);
+  }
+  
   return (
     <header>
       <nav className="navbar">
         <a className="navbar-mjleedev" href='https://mjlee.dev'> mjlee.dev </a>
-        <Form className="navbar-room-form" method="get" action={`/${roomId}`}>
+        <Form className="navbar-room-form" method="get" action={`/${roomId}`} onSubmit={refreshPage}>
           <p className='navbar-room-count'>{count}</p>
           <input className="navbar-room-input"
             placeholder='join a room'
