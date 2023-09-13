@@ -1,4 +1,4 @@
-# chat
+# [chat](https://chat.mjlee.dev)
 A chat app with rooms identified by the slug.
 example.com/room/this-is-a-slug
 
@@ -13,5 +13,8 @@ Server hosted on [fly.io](https://fly.io) and client hosted on [cloudflare](http
 
 # todo
 fileshare
+
 light theme button
+
 disconnected prompt, reconnect button
+
