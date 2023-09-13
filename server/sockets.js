@@ -1,6 +1,7 @@
 
 const sockets = (socket) => {
   socket.on("c_join", (data) => {
+    socket.inactivityTimeout = setTimeout(() => socket.disconnect(true), 1000 * 30);
     socket.join(data.room_id)
     let s = socket.broadcast;
     s = data.room_id ? s.to(data.room_id) : s;
@@ -8,6 +9,8 @@ const sockets = (socket) => {
   })
   
   socket.on('c_msg', (data) => {
+    clearTimeout(socket.inactivityTimeout);
+    socket.inactivityTimeout = setTimeout(() => socket.disconnect(true), 1000 * 60);
     let s = socket.broadcast;
     s = data.room_id ? s.to(data.room_id) : s;
     s.emit("s_msg", {user: data.user, message: data.message});

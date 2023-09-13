@@ -14,5 +14,4 @@ Server hosted on [fly.io](https://fly.io) and client hosted on [cloudflare](http
 # todo
 fileshare
 light theme button
-auto disconnect idle
-user count in room
+disconnected prompt, reconnect button

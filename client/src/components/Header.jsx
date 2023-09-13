@@ -1,10 +1,10 @@
 import { useEffect,useState } from 'react'
-import { Form, useNavigate, useParams } from 'react-router-dom';
+import { Form, useParams } from 'react-router-dom';
 
 export default function Header() {
   const [roomId, setRoomId] = useState("")
-  const params = useParams();
   const [count, setCount] = useState(0)
+  const params = useParams();
 
   useEffect(() => {
     if (!params.room_id) return;
@@ -32,16 +32,11 @@ export default function Header() {
     return 
   }
 
-  const navigate = useNavigate();
-  const refreshPage = (e) => {
-    navigate(0);
-  }
-
   return (
     <header>
       <nav className="navbar">
         <a className="navbar-mjleedev" href='https://mjlee.dev'> mjlee.dev </a>
-        <Form className="navbar-room-form" method="get" action={`/${roomId}`}>
+        <Form reloadDocument className="navbar-room-form" method="get" action={`/${roomId}`}>
           <p className='navbar-room-count'>{count}</p>
           <input className="navbar-room-input"
             placeholder='join a room'
