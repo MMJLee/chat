@@ -32,8 +32,10 @@ const sockets = (socket) => {
     let s = socket.broadcast;
     let rooms = Object.keys(socket.rooms);
     rooms.forEach((room) => {
-      socket.leave(room);
-      s.to(room).emit("s_leave", {user: data.user});
+      if (socket_id !== room) {
+        socket.leave(room);
+        s.to(room).emit("s_leave", {user: data.user});
+      }
     });
   });
 };

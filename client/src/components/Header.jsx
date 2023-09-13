@@ -18,7 +18,6 @@ export default function Header() {
 
   function getCount() {
     if (params.room_id) {
-      // fetch(`{http://localhost:3000}/count/${params.room_id}`)
       fetch(`${import.meta.env.VITE_SERVER_URL}/count/${params.room_id}`)
       .then(response => response.json())
       .then(json => setCount(json.count))
@@ -36,7 +35,7 @@ export default function Header() {
     <header>
       <nav className="navbar">
         <a className="navbar-mjleedev" href='https://mjlee.dev'> mjlee.dev </a>
-        <Form className="navbar-room-form" method="get" action={`/${roomId}`}>
+        <Form reloadDocument className="navbar-room-form" method="get" action={`/${roomId}`}>
           <p className='navbar-room-count'>{count}</p>
           <input className="navbar-room-input"
             placeholder='join a room'

@@ -10,7 +10,6 @@ function App() {
 
   useEffect(() => {
     setSocket(io(import.meta.env.VITE_SERVER_URL, {withCredentials:true}));
-    // setSocket(io('http://localhost:3000'));
   }, []);
 
   function handleSubmit(e) {
@@ -18,9 +17,9 @@ function App() {
     setUser(e.target[0].value);
   }
   
-  function Chatroom(props) {
-    if (props.user) {
-      return <Outlet context={{socket:props.socket, user:props.user}}/>
+  function Chatroom({socket, user}) {
+    if (user) {
+      return <Outlet context={{socket:socket, user:user}}/>
     } else {
       return (
         <form className="username-form" onSubmit={handleSubmit}>
@@ -29,6 +28,7 @@ function App() {
       )       
     }
   }
+
   return (
     <div id="app" className="dark">
       <Header/>
