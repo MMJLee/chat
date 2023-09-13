@@ -1,13 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useOutletContext, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
-export default function Chat() {
-  const { socket, user } = useOutletContext();
-  // const { user } = useOutletContext();
+export default function Chat({socket, user, room_id}) {
   const [message, setMessage] = useState("")
   const [chat, setChat] = useState([])
   const [typing, setTyping] = useState('');
-  const {room_id} = useParams();
   
   useEffect(() => {
     if (!socket) return;
@@ -77,13 +74,15 @@ export default function Chat() {
   }
 
   function ChatMessageItem(props) {
-    return (
-      <div className={user == props.user ? 'chat-message-container my-messages' : 'chat-message-container'}>
-        <div>
-          <p className='chat-user'>{props.user}</p><p className='chat-message'>{props.message}</p>
+    if (props.user && props.message) {
+      return (
+        <div className={user == props.user ? 'chat-message-container my-messages' : 'chat-message-container'}>
+          <div>
+            <p className='chat-user'>{props.user}</p><p className='chat-message'>{props.message}</p>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
   
   return (

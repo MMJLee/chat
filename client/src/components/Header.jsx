@@ -16,6 +16,12 @@ export default function Header() {
     return () => clearInterval(timer);
   },[]);
 
+  useEffect(() => {
+    let url = window.location.href;
+    if( url.endsWith("?") ) { url = url.substring( 0, url.length-1 ); }
+    window.history.pushState( {"page":"TheSamePage"}, "TheSamePage", url );
+  },[window.location.href]);
+
   function getCount() {
     if (params.room_id) {
       fetch(`${import.meta.env.VITE_SERVER_URL}/count/${params.room_id}`)

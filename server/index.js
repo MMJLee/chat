@@ -8,13 +8,13 @@ const port = 3000;
 const app = express();
 app.use(cors({
   // origin: ["http://127.0.0.1:5173"],
-  origin:[process.env.CLIENT_URL]
-}));
+  origin:["https://chat.mjlee.dev"], 
+  }));
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
   cors: {
     // origin: ["http://127.0.0.1:5173"],
-    origin:[process.env.CLIENT_URL], 
+    origin:["https://chat.mjlee.dev"], 
     credentials: true,
     methods: ["GET", "POST"],
   }
