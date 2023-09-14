@@ -12,7 +12,7 @@ export default function Header() {
   }, [params.room_id]);
 
   useEffect(() => {
-    const timer = setInterval(() => getCount(), 3000);
+    const timer = setInterval(() => getCount(), 2500);
     return () => clearInterval(timer);
   },[]);
 
@@ -20,6 +20,7 @@ export default function Header() {
     let url = window.location.href;
     if( url.endsWith("?") ) { url = url.substring( 0, url.length-1 ); }
     window.history.pushState( {"page":"TheSamePage"}, "TheSamePage", url );
+    getCount()
   },[window.location.href]);
 
   function getCount() {
@@ -47,7 +48,9 @@ export default function Header() {
       <nav className="navbar">
         <a className="navbar-mjleedev" href='https://mjlee.dev'> mjlee.dev </a>
         <Form reloadDocument className="navbar-room-form" method="get" action={`/${roomId}`}>
-          <p className='navbar-room-count'>{count}</p>
+          <p className='navbar-room-count'
+            onClick={() => {navigator.clipboard.writeText('https://chat.mjlee.dev/'+roomId)}}
+          >{count}</p>
           <input className="navbar-room-input"
             placeholder='join a room'
             value={roomId}
