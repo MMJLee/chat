@@ -12,6 +12,7 @@ where no contents are kept on server.
 Server hosted on [fly.io](https://fly.io) and client hosted on [cloudflare](https://cloudflare.com).
 
 # todo
-fileshare
-light theme button
-disconnected prompt, reconnect button
+fileshare,
+light theme button,
+disconnected prompt, 
+reconnect button
