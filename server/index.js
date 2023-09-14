@@ -12,7 +12,6 @@ app.use(cors({
 const httpServer = http.createServer(app);
 
 const io = new Server(httpServer, {
-  path: "/chat/socket.io/",
   cors: {
     origin: "https://chat.mjlee.dev", 
     credentials: true,

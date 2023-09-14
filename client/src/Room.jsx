@@ -7,14 +7,10 @@ export default function Room() {
   const { socket } = useOutletContext();
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    if (!socket || !user) return;
-    socket.emit("c_join", {room_id:room_id, user:user});
-  }, [socket,room_id,user]);
-
   function handleSubmit(e) {
     e.preventDefault();
     setUser(e.target[0].value);
+    socket.emit("c_join", {room_id:room_id, user:user});
   }
   
   function Chatroom({socket, user, room_id}) {
