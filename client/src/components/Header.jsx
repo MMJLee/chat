@@ -12,7 +12,7 @@ export default function Header() {
   }, [params.room_id]);
 
   useEffect(() => {
-    const timer = setInterval(() => getCount(), 2500);
+    const timer = setInterval(() => getCount(), 3000);
     return () => clearInterval(timer);
   },[]);
 
@@ -20,7 +20,6 @@ export default function Header() {
     let url = window.location.href;
     if( url.endsWith("?") ) { url = url.substring( 0, url.length-1 ); }
     window.history.pushState( {"page":"TheSamePage"}, "TheSamePage", url );
-    getCount()
   },[window.location.href]);
 
   function getCount() {
@@ -30,7 +29,7 @@ export default function Header() {
       .then(json => setCount(json.count))
       .catch(error => console.error(error));
     } else {
-      fetch(`${import.meta.env.VITE_SERVER_URL}/chat/count/`)
+      fetch(`${import.meta.env.VITE_SERVER_URL}/chat/count`)
       .then(response => response.json())
       .then(json => setCount(json.count))
       .catch(error => console.error(error));
