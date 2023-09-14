@@ -25,12 +25,12 @@ export default function Header() {
 
   function getCount() {
     if (params.room_id) {
-      fetch(`${import.meta.env.VITE_SERVER_URL}/count/${params.room_id}`)
+      fetch(`${import.meta.env.VITE_SERVER_URL}/chat/count/${params.room_id}`)
       .then(response => response.json())
       .then(json => setCount(json.count))
       .catch(error => console.error(error));
     } else {
-      fetch(`${import.meta.env.VITE_SERVER_URL}/count/`)
+      fetch(`${import.meta.env.VITE_SERVER_URL}/chat/count/`)
       .then(response => response.json())
       .then(json => setCount(json.count))
       .catch(error => console.error(error));
