@@ -13,6 +13,15 @@
   --secondary-color-dark: #212529; 
   }
 
+.dark {
+    --tc: var(--text-color-dark);
+    --tc2: var(--text-secondary-color-dark);
+    --bg: var(--background-color-dark);
+    --bg2: var(--secondary-background-color-dark);
+    --pc: var(--primary-color-dark);
+    --sc: var(--secondary-color-dark);
+}
+
 .light {
   --tc: var(--text-color);
   --tc2: var(--text-secondary-color);
@@ -22,14 +31,7 @@
   --sc: var(--secondary-color);
 }
 
-.dark {
-  --tc: var(--text-color-dark);
-  --tc2: var(--text-secondary-color-dark);
-  --bg: var(--background-color-dark);
-  --bg2: var(--secondary-background-color-dark);
-  --pc: var(--primary-color-dark);
-  --sc: var(--secondary-color-dark);
-}
+
 
 body {
   margin: 0;
@@ -46,7 +48,7 @@ body {
 }
 
 .navbar{
-  height: 90px;
+  height: 88px;
   width: 100%;
   background: var(--bg);
   color: var(--tc);
@@ -54,7 +56,11 @@ body {
   align-items: center;
   font-family: "Alata", sans-serif;
 }
-
+@media screen and (max-width: 768px) {
+  .navbar{
+    height: 72px;
+  }
+}
 .navbar-mjleedev{
   color: var(--pc);
   font-size: 1.25rem;
@@ -65,27 +71,33 @@ body {
 @media screen and (max-width: 768px) {
   .navbar-mjleedev {
     margin-left: 0.6em;
-    margin-top: 0.1em;
     margin-right: 0;
   }
 }
 
 .navbar-room-form{
-  width: 100%;
+  flex:1;
   text-align: center;
   margin: 1em 3em;
 }
 @media screen and (max-width: 768px) {
   .navbar-room-form{
-    margin-top: 0.1em;
     margin-left: 0;
     margin-right: 0;
     text-align: right;
   }
 }
 
+.navbar-room-count {
+  display: inline;
+  margin-right: 0.5em;
+  font-family: "Alata", sans-serif;
+  color: var(--tc);
+}
+
 .navbar-room-input{
-  margin-right: 209px;
+  margin-left: 0;
+  margin-right: 7.5em;
   padding: 0.5em;
   height: 100%;
   background-color: var(--bg2);
@@ -96,15 +108,35 @@ body {
 }
 @media screen and (max-width: 768px) {
   .navbar-room-input {
-    margin-right: 20px;
+    margin-right: 0;
+  }
+}
+.navbar-theme-button{
+  background-color: var(--bg);
+  color: var(--tc);
+  height: 100%;
+  border: none;
+  font-size: 26px;
+  margin-right: 2.85em;
+}
+@media screen and (max-width: 768px) {
+  .navbar-theme-button {
+    margin: 0 0.1em;
   }
 }
 
-.navbar-room-count {
-  display: inline;
-  margin-right: 1em;
-  font-family: "Alata", sans-serif;
-  color: var(--tc);
+#sun{
+  display: block;
+}
+.light #sun{
+  display: none;
+}
+
+#moon{
+  display: none;
+}
+.light #moon{
+  display: block;
 }
 
 .username-form{
@@ -246,5 +278,7 @@ ul {
 
 .typing-alert{
   font-family: "Alata", sans-serif;
-  padding-left: 7px;
+  padding-left: 5px;
+  line-height: 0.6em;
+  color: var(--tc2);
 }

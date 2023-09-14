@@ -22,18 +22,18 @@ export default function Chat({socket, user, room_id}) {
     socket.on("s_join", (data)=> {
       setChat((chat) => [...chat,{
         user: data.user,
-        message: 'joined'}])
+        message: ''}])
     });
     socket.on("s_leave", (data)=> {
       setChat((chat) => [...chat,{
         user: data.user,
-        message: 'left'}])
+        message: ''}])
     });
   }, [socket]);
   
   useEffect(() => {
     if (!socket) return;
-    const timeOutId = setTimeout(() => socket.emit("c_stop", {room_id: room_id, user: user}), 500);
+    const timeOutId = setTimeout(() => socket.emit("c_stop", {room_id: room_id}), 500);
     return () => clearTimeout(timeOutId);
   }, [message]);
 
@@ -44,19 +44,19 @@ export default function Chat({socket, user, room_id}) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (message != '') {
-      setChat((chat) => [...chat,{user:user, message:message}]);
-      socket.emit("c_msg", {room_id:room_id, user:user, message:message});
-      setMessage(""); 
-    }
+    sendMessage();
   }
 
   function handleKeyDown(e) {
     socket.emit('c_start', {room_id: room_id, user: user});
-    if (message != '' && e.keyCode == 13) {
-      socket.emit("c_stop", {room_id: room_id, user: user})
+    if (e.keyCode == 13) sendMessage();
+  }
+
+  function sendMessage() {
+    if (message.replace(/\s/g, '').length) {
+      socket.emit("c_stop", {room_id: room_id})
       setChat((chat) => [...chat,{user:user, message:message}]);
-      socket.emit("c_msg", {room_id:room_id, user:user, message:message});
+      socket.emit("c_msg", {room_id:room_id, message:message});
       setMessage("");
     }
   }
@@ -74,7 +74,7 @@ export default function Chat({socket, user, room_id}) {
   }
 
   function ChatMessageItem(props) {
-    if (props.user && props.message) {
+    if (props.user) {
       return (
         <div className={user == props.user ? 'chat-message-container my-messages' : 'chat-message-container'}>
           <div>

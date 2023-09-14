@@ -8,8 +8,7 @@ export default function Room() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (!socket) return;
-    socket.emit("c_leave", {user:user});
+    if (!socket || !user) return;
     socket.emit("c_join", {room_id:room_id, user:user});
   }, [socket,room_id,user]);
 

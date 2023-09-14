@@ -13,6 +13,4 @@ Server hosted on [fly.io](https://fly.io) and client hosted on [cloudflare](http
 
 # todo
 fileshare,
-light theme button,
-disconnected prompt, 
-reconnect button
+mobile ui with keyboard
