@@ -7,13 +7,13 @@ import cors from 'cors';
 const port = 3000;
 const app = express();
 app.use(cors({
-  origin: "https://chat.mjlee.dev", 
+  origin: ["https://chat.mjlee.dev"], 
 }));
 const httpServer = http.createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "https://chat.mjlee.dev", 
+    origin: ["https://chat.mjlee.dev"], 
     credentials: true,
     methods: ["GET", "POST"],
   }
