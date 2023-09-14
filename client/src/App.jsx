@@ -8,7 +8,7 @@ function App() {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    setSocket(io(import.meta.env.VITE_SERVER_URL, {withCredentials: true}));
+    setSocket(io(import.meta.env.VITE_SERVER_URL, {withCredentials:true}));
   }, []);
 
   return (

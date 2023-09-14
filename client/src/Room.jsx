@@ -15,7 +15,7 @@ export default function Room() {
   function handleSubmit(e) {
     e.preventDefault();
     setUser(e.target[0].value);
-    socket.emit("c_join", {room_id:room_id, user:user});
+    // socket.emit("c_join", {room_id:room_id, user:user});
   }
   
   function Chatroom({socket, user, room_id}) {
