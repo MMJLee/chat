@@ -5,6 +5,7 @@ export default function Chat({socket, user, room_id}) {
   const [chat, setChat] = useState([]);
   const [typing, setTyping] = useState('');
   const [count, setCount] = useState(0);
+  const [file, setFile] = useState(null);
 
   useEffect(() => {
     if (!socket) return;
@@ -50,11 +51,7 @@ export default function Chat({socket, user, room_id}) {
   },[]);
 
   const el = document.getElementById('chat-messages');
-  if (el) {
-    el.scrollTop = el.scrollHeight;
-  }
-
-
+  if (el) el.scrollTop = el.scrollHeight;
 
   function handleKeyDown(e) {
     socket.emit('c_start', {room_id: room_id});
@@ -63,6 +60,10 @@ export default function Chat({socket, user, room_id}) {
       setChat((chat) => [...chat,{user:user, message:message}]);
       socket.emit("c_msg", {room_id:room_id, message:message});
       setMessage("");
+      if (file) {
+        socket.emit("c_file", {buffer:file});
+        setFile(null)
+      }
     }
   }
 
@@ -96,6 +97,7 @@ export default function Chat({socket, user, room_id}) {
     }
     return `${count} chatters`
   }
+
   return (
     <div className='chat-container'>
       <ul id="chat-messages" className="hide-scrollbar">
@@ -104,7 +106,7 @@ export default function Chat({socket, user, room_id}) {
       <Typing/>
       <form className="chat-form" onKeyDown={e => handleKeyDown(e)} onKeyUp={e => handleKeyUp(e)}>
         <div className='chat-text-container'>
-          <textarea className="chat-text" value={message} autoComplete="off" placeholder={"send a message"} onChange={(e) => setMessage(e.target.value)}/>
+          <textarea className="chat-text" value={message} autoComplete="off" placeholder={"send a message"} onChange={e => setMessage(e.target.value)}/>
           <div className='chat-room-counter'>{countText()}</div>
         </div>
       </form>

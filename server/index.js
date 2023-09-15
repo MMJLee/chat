@@ -11,6 +11,9 @@ app.use(cors({
 }));
 const httpServer = http.createServer(app);
 const io = new Server(httpServer, {
+  connectionStateRecovery: {
+    maxDisconnectionDuration: 1 * 60 * 1000,
+  },
   path: "/chat/socketio/",
   cors: {
     origin: process.env.CLIENT_URL || "http://127.0.0.1:5173",

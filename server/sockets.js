@@ -1,6 +1,6 @@
-
+import fs from "fs";
 const sockets = (socket) => {
-  socket.inactivityTimeout = setTimeout(() => socket.disconnect(true), 1000 * 10);
+  socket.inactivityTimeout = setTimeout(() => socket.disconnect(true), 1000 * 60 * 5);
 
   socket.on("c_join", (data) => {
     socket.username = data.user
@@ -29,7 +29,12 @@ const sockets = (socket) => {
     }
     socket.emit("s_count",{count: count});
   });
-    
+  
+  socket.on("c_file", (data) => {
+    console.log(data)
+    socket.broadcast.to(data.room_id).emit("s_file", {buffer:data.toString("base64")});
+  });
+
   socket.on("disconnecting", (data) => {
     for (const room of socket.rooms) {
       if (room !== socket.id) {
