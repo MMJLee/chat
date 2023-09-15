@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { useParams } from "react-router-dom";
 
 export default function Chat({socket, user, room_id}) {
   const [message, setMessage] = useState("")
@@ -37,6 +36,11 @@ export default function Chat({socket, user, room_id}) {
     return () => clearTimeout(timeOutId);
   }, [message]);
 
+  useEffect(() => {
+    const timer = setInterval(() => setTyping(''), 1000);
+    return () => clearInterval(timer);
+  },[]);
+
   const el = document.getElementById('chat-messages');
   if (el) {
     el.scrollTop = el.scrollHeight;
@@ -48,7 +52,7 @@ export default function Chat({socket, user, room_id}) {
   }
 
   function handleKeyDown(e) {
-    socket.emit('c_start', {room_id: room_id, user: user});
+    socket.emit('c_start', {room_id: room_id});
     if (e.keyCode == 13) sendMessage();
   }
 
