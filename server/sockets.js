@@ -1,4 +1,3 @@
-import fs from "fs";
 const sockets = (socket) => {
   socket.inactivityTimeout = setTimeout(() => socket.disconnect(true), 1000 * 60 * 5);
 
@@ -31,8 +30,7 @@ const sockets = (socket) => {
   });
   
   socket.on("c_file", (data) => {
-    console.log(data)
-    socket.broadcast.to(data.room_id).emit("s_file", {buffer:data.toString("base64")});
+    socket.emit("s_file", {user: socket.username, filename: data.filename, buffer:data.buffer});
   });
 
   socket.on("disconnecting", (data) => {
