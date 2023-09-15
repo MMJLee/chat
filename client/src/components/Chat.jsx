@@ -8,6 +8,12 @@ export default function Chat({socket, user, room_id}) {
   const [file, setFile] = useState(null);
 
   useEffect(() => {
+    const fileButton = document.getElementById("file-upload-container");
+    if (file) fileButton.classList.add("file-upload-container-full");
+    else fileButton.classList.remove("file-upload-container-full");
+  }, [file]);
+
+  useEffect(() => {
     if (!socket) return;
     socket.on("s_msg", (data) => {
       setChat((chat) => [...chat,{
@@ -76,7 +82,12 @@ export default function Chat({socket, user, room_id}) {
         socket.emit("c_msg", {room_id:room_id, message:message});
         setMessage("");
       }
-    }  
+    }
+    if (e.keyCode == 27) {
+      setFile(null);
+      const uploadInput = document.getElementById('chat-upload');
+      if (uploadInput) uploadInput.value = '';
+    }
   }
 
   function handleKeyUp(e) {
@@ -98,7 +109,7 @@ export default function Chat({socket, user, room_id}) {
           <div className={user == data.user ? 'chat-message-container my-messages' : 'chat-message-container'}>
             <div>
               <p className='chat-user'>{data.user}</p>
-              <a className='chat-message'
+              <a className='chat-message-link'
                 href={`data:application/octet-stream;base64,${btoa(String.fromCharCode(...new Uint8Array(data.buffer)))}`}
                 download={data.filename}
               >
@@ -148,7 +159,7 @@ export default function Chat({socket, user, room_id}) {
       <form className="chat-form" onKeyDown={e => handleKeyDown(e)} onKeyUp={e => handleKeyUp(e)}>
         <div className='chat-text-container'>
           <textarea className="chat-text" value={message} autoComplete="off" placeholder={"send a message"} onChange={e => setMessage(e.target.value)}/>
-          <div className="file-upload-container">
+          <div id="file-upload-container">
             <label htmlFor="chat-upload" className="chat-upload-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
               <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
