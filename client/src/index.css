@@ -88,16 +88,20 @@ body {
   }
 }
 
-.navbar-room-count {
-  display: inline;
-  margin-right: 0.5em;
-  font-family: "Alata", sans-serif;
+.navbar-copy-button {
+  background-color: var(--bg);
   color: var(--tc);
+  height: 100%;
+  border: none;
+  transition: color 0.5s ease-in;
+}
+.navbar-copy-button:hover {
+  color: var(--primary-color);
 }
 
 .navbar-room-input{
   margin-left: 0;
-  margin-right: 7.5em;
+  margin-right: 11em;
   padding: 0.5em;
   height: 100%;
   background-color: var(--bg2);
@@ -111,6 +115,7 @@ body {
     margin-right: 0;
   }
 }
+
 .navbar-theme-button{
   background-color: var(--bg);
   color: var(--tc);
@@ -223,8 +228,6 @@ ul {
   line-height: auto;
 }
 
-
-
 .chat-form{
   width: 100%;
   display: flex;
@@ -232,6 +235,7 @@ ul {
 
 .chat-text-container{
   width: 100%;
+  position: relative;
 }
 
 .chat-text{
@@ -243,19 +247,21 @@ ul {
   outline: none;
   resize: none;
   border-bottom-left-radius: 0.7em;
+  border-bottom-right-radius: 0.7em;
   font-size: 1em;
   background-color: var(--bg2);
   color: var(--tc);
-  border: 1px solid var(--tc2);
+  border: none;
+  border-top: 0.9px solid var(--tc2);
   font-family: "Alata", sans-serif;
 }
 
-.chat-button{
-  border-bottom-right-radius: 0.7em;
-  border: 1px solid var(--tc2);
-  background-color: var(--bg2);
-  color: var(--tc);
+.chat-room-counter{
+  position:absolute;
+  bottom: 0.1em;
+  right: 0.1em;
   font-family: "Alata", sans-serif;
+  color: var(--tc2);
 }
 
 .hide-scrollbar{

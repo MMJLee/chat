@@ -1,6 +1,6 @@
 
 const sockets = (socket) => {
-  socket.inactivityTimeout = setTimeout(() => socket.disconnect(true), 1000 * 60 * 2);
+  socket.inactivityTimeout = setTimeout(() => socket.disconnect(true), 1000 * 10);
 
   socket.on("c_join", (data) => {
     socket.username = data.user
@@ -22,6 +22,14 @@ const sockets = (socket) => {
     socket.broadcast.to(data.room_id).emit("s_stop", {user: socket.username});
   });
 
+  socket.on("c_count", (data) => {
+    let count = 0;
+    if(socket.adapter.rooms.has(data.room_id)) {
+      count = socket.adapter.rooms.get(data.room_id).size
+    }
+    socket.emit("s_count",{count: count});
+  });
+    
   socket.on("disconnecting", (data) => {
     for (const room of socket.rooms) {
       if (room !== socket.id) {

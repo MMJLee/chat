@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
 
 export default function Chat({socket, user, room_id}) {
-  const [message, setMessage] = useState("")
-  const [chat, setChat] = useState([])
+  const [message, setMessage] = useState("");
+  const [chat, setChat] = useState([]);
   const [typing, setTyping] = useState('');
-  
+  const [count, setCount] = useState(0);
+
   useEffect(() => {
     if (!socket) return;
     socket.on("s_msg", (data) => {
       setChat((chat) => [...chat,{
         user: data.user, 
-        message: data.message}])    
+        message: data.message}]);
     });
     socket.on("s_start", (data) => {
       setTyping(data.user);
@@ -21,12 +22,15 @@ export default function Chat({socket, user, room_id}) {
     socket.on("s_join", (data)=> {
       setChat((chat) => [...chat,{
         user: data.user,
-        message: ''}])
+        message: ''}]);
     });
     socket.on("s_leave", (data)=> {
       setChat((chat) => [...chat,{
         user: data.user,
-        message: ''}])
+        message: ''}]);
+    });
+    socket.on("s_count", (data)=> {
+      setCount(data.count);
     });
   }, [socket]);
   
@@ -37,8 +41,12 @@ export default function Chat({socket, user, room_id}) {
   }, [message]);
 
   useEffect(() => {
-    const timer = setInterval(() => setTyping(''), 1000);
-    return () => clearInterval(timer);
+    const typingTimer = setInterval(() => setTyping(''), 1000);
+    const countTimer = setInterval(() => socket.emit("c_count", {room_id: room_id}, 3000));
+    return () => {
+      clearInterval(typingTimer);
+      clearInterval(countTimer);
+    }
   },[]);
 
   const el = document.getElementById('chat-messages');
@@ -46,18 +54,11 @@ export default function Chat({socket, user, room_id}) {
     el.scrollTop = el.scrollHeight;
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    sendMessage();
-  }
+
 
   function handleKeyDown(e) {
     socket.emit('c_start', {room_id: room_id});
-    if (e.keyCode == 13) sendMessage();
-  }
-
-  function sendMessage() {
-    if (message.replace(/\s/g, '').length) {
+    if (e.keyCode == 13 && message.replace(/\s/g, '').length) {
       socket.emit("c_stop", {room_id: room_id})
       setChat((chat) => [...chat,{user:user, message:message}]);
       socket.emit("c_msg", {room_id:room_id, message:message});
@@ -88,18 +89,24 @@ export default function Chat({socket, user, room_id}) {
       )
     }
   }
-  
+
+  function countText() {
+    if (count < 2) {
+      return "you're alone"
+    }
+    return `${count} chatters`
+  }
   return (
     <div className='chat-container'>
       <ul id="chat-messages" className="hide-scrollbar">
         {chat.map((data, index) => <ChatMessageItem key={index} user={data.user} message={data.message}/>)}
       </ul>
       <Typing/>
-      <form className="chat-form" onSubmit={handleSubmit} onKeyDown={e => handleKeyDown(e)} onKeyUp={e => handleKeyUp(e)}>
+      <form className="chat-form" onKeyDown={e => handleKeyDown(e)} onKeyUp={e => handleKeyUp(e)}>
         <div className='chat-text-container'>
-          <textarea className="chat-text" value={message} autoComplete="off" placeholder='type a message' onChange={(e) => setMessage(e.target.value)}/>
+          <textarea className="chat-text" value={message} autoComplete="off" placeholder={"send a message"} onChange={(e) => setMessage(e.target.value)}/>
+          <div className='chat-room-counter'>{countText()}</div>
         </div>
-        <button className="chat-button" type="submit">Send</button>
       </form>
     </div>
   )
