@@ -11,4 +11,4 @@ where no contents are kept on server. You are automatically disconnected if idli
 
 Server hosted on [fly.io](https://fly.io) and client hosted on [cloudflare](https://cloudflare.com).
 
-# todo
+Made with Node.js, React.js, Socket.io, and vanilla CSS
